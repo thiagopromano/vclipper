@@ -6,9 +6,9 @@ pub fn run(input_video: &str, times: Vec<Time>) {
         .args(&["-filter_complex", &create_filter_complex_argument(times)[..]])
         .args(&["-map", "[out]"])
         .arg("out.".to_string() + get_extension_from_filename(input_video))
+        .args(&["-progress", "pipe:1"])
         .status()
-        .expect("failed to start ffmpeg")
-    ;
+        .expect("failed to start ffmpeg");
     println!("process exited with: {}", status);
 }
 
