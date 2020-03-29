@@ -27,7 +27,7 @@ fn create_filter_complex_argument(slices_in_seconds: Vec<Time>) -> String {
     slices_in_seconds
         .iter()
         .enumerate()
-        .map(|enum_time| format!("[0:v]trim={0}:{1},setpts=PTS-STARTPTS[v{2}];[0:a]trim={0}:{1},setpts=PTS-STARTPTS[a{2}];", enum_time.1.start, enum_time.1.end, enum_time.0))
+        .map(|enum_time| format!("[0:v]trim={0}:{1},setpts=PTS-STARTPTS[v{2}];[0:a]atrim={0}:{1},asetpts=PTS-STARTPTS[a{2}];", enum_time.1.start, enum_time.1.end, enum_time.0))
         .collect::<Vec<String>>()
         .join("") +
         &slices_in_seconds.iter().enumerate().map(|enum_time| format!("[v{0}][a{0}]", enum_time.0))
